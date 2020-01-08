@@ -8,7 +8,7 @@ MESSAGE=( "${MESSAGE[@]:1}" )
 SUBJECT=${MESSAGE[@]}
 echo "/**********************************************************************************/"
 echo "SENDING TO:$USER -  MESSAGE: $SUBJECT"
-RETURN=$(${CURL} -k -s -S --max-time 5 -c ${COOKIE} -b ${COOKIE} -X GET "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${USER}&text=${SUBJECT}")
-echo $RETURN
+RETURN=$(${CURL} -k -s -S --max-time 30 -c ${COOKIE} -b ${COOKIE} -X GET --data-urlencode "chat_id=${USER}" --data-urlencode "text=${SUBJECT}" "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage")
+echo -e $RETURN
 rm -f ${COOKIE}
 exit 0
